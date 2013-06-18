@@ -1,4 +1,8 @@
 var crimer = function (t) {
+    if (!t.length) {
+        return "";
+    }
+
     var scale = Math.ceil(t.length / 100);
     
     // Eliminate doubled letters.
@@ -8,7 +12,7 @@ var crimer = function (t) {
     t = t.replace(/'/g, "");
     
     // Double some letters randomly.
-    var doubles = Math.floor(Math.random() * 4 * scale) + 2 * scale;
+    var doubles = Math.floor(Math.random() * (4.0 * scale)) + (2.0 * scale);
     for (var i = 0; i < doubles; i++) {
         var pos = Math.floor(Math.random() * t.length);
         var letter = t[pos];
@@ -21,7 +25,7 @@ var crimer = function (t) {
     t = t.replace(/\s+the\b/i, "the");
 
     // Capitalize words randomly.
-    var caps = Math.floor(Math.random() * 2 * scale) + 2 * scale;
+    var caps = Math.floor(Math.random() * (2.0 * scale)) + (2.0 * scale);
     var words = t.split(/\s+/);
     for (i = 0; i < caps; i++) {
         var pos = Math.floor(Math.random() * words.length);
@@ -32,12 +36,12 @@ var crimer = function (t) {
     t = words.join(" ");
 
     // Randomly transpose some letters.
-    var transpose = Math.floor(Math.random() * 6 * scale) + 6 * scale;
+    var transpose = Math.floor(Math.random() * 4.0 * scale) + (2.0 * scale);
     for (i = 0; i < transpose; i++) {
-        var pos = Math.floor(Math.random() * t.length - 1);
-        var aletter = t[pos];
-        t[pos] = t[pos + 1];
-        t[pos + 1] = aletter;
+        var pos = Math.floor(Math.random() * (t.length - 2)) + 1.0;
+        if (t[pos].match(/\w/) && t[pos + 1].match(/\w/) && t[pos - 1].match(/\w/)) {
+            t = t.substr(0, pos) + t[pos + 1] + t[pos] + t.substr(pos + 2);
+        }
     }
 
     // E before I except sometimes.
