@@ -1,5 +1,5 @@
 var crimer = function (t) {
-    var scale = Math.ceil(t.length / 50);
+    var scale = Math.ceil(t.length / 100);
     
     // Eliminate doubled letters.
     t = t.replace(/(\w)\1/g, "$1");
@@ -8,11 +8,13 @@ var crimer = function (t) {
     t = t.replace(/'/g, "");
     
     // Double some letters randomly.
-    var doubles = Math.floor(Math.random() * 2 * scale) + 2 * scale;
+    var doubles = Math.floor(Math.random() * 4 * scale) + 2 * scale;
     for (var i = 0; i < doubles; i++) {
         var pos = Math.floor(Math.random() * t.length);
         var letter = t[pos];
-        t = t.substr(0, pos) + letter + t.substr(pos);
+        if (letter.match(/\w\.!\?/) && letter != t[pos - 1] && letter != t[pos + 1]) {
+            t = t.substr(0, pos) + letter + t.substr(pos);
+        }
     }
 
     // Eliminate spaces before 'the'.
@@ -44,8 +46,8 @@ var crimer = function (t) {
 
     // Mess with some simple words.
     t = t.replace(/\bI\b/ig, "Im");
-    t = t.replace(/\bit is\b/ig, "its is");
     t = t.replace(/\bits\b/ig, "its is");
+    t = t.replace(/\bit is\b/ig, "its is");
     
     // Remove useless unvoiced letters.
     t = t.replace(/mb\b/gi, "m");
@@ -54,7 +56,6 @@ var crimer = function (t) {
     t = t.replace(/ght\b/gi, "te");
     t = t.replace(/ph/gi, "f");
     t = t.replace(/our/gi, "or");
-    t = t.replace(/ou/gi, "ow");
 
     // Ensure names (followed by ':') are all caps.
     var words = t.split(/\s+/);
@@ -68,7 +69,7 @@ var crimer = function (t) {
     // Swap some vowels.
     var vowels = "aeiou";
     for (i = 0; i < t.length; i++) {
-        if (t[i].match(/[aeiou]/) && Math.random() > 0.85) {
+        if (t[i].match(/[aeiou]/) && Math.random() > 0.9) {
             vowels = vowels.replace(t[i], "");
             t = t.substr(0, i) + vowels[Math.floor(Math.random() * 4)] + t.substr(i + 1);
             vowels = "aeiou";
@@ -78,8 +79,8 @@ var crimer = function (t) {
     // Add e or s to ends of some words.
     var words = t.split(/\s+/);
     for (i = 0; i < words.length; i++) {
-        if (Math.random() > 0.6 && words[i].match(/\w$/)) {
-            var letter = ['e', 's'][Math.floor(Math.random()) + 1];
+        if (Math.random() > 0.7 && words[i].match(/\w$/) && words[i].length > 1) {
+            var letter = ['e', 's'][Math.floor(Math.random() * 2)];
             words[i] += letter;
         }
     }
