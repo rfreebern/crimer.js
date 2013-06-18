@@ -83,7 +83,7 @@ var crimer = function (t) {
     // Add e or s to ends of some words.
     var words = t.split(/\s+/);
     for (i = 0; i < words.length; i++) {
-        if (Math.random() > 0.7 && words[i].match(/\w$/) && words[i].length > 1) {
+        if (Math.random() > 0.7 && words[i].match(/\w$/) && words[i].length > 1 && !words[i].match(/[es]$/)) {
             var letter = ['e', 's'][Math.floor(Math.random() * 2)];
             words[i] += letter;
         }
