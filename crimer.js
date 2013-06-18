@@ -8,7 +8,7 @@ var crimer = function (t) {
     t = t.replace(/'/g, "");
     
     // Double some letters randomly.
-    var doubles = Math.floor(Math.random() * 3 * scale) + 3 * scale;
+    var doubles = Math.floor(Math.random() * 2 * scale) + 2 * scale;
     for (var i = 0; i < doubles; i++) {
         var pos = Math.floor(Math.random() * t.length);
         var letter = t[pos];
