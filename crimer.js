@@ -12,11 +12,11 @@ var crimer = function (t) {
     t = t.replace(/'/g, "");
     
     // Double some letters randomly.
-    var doubles = Math.floor(Math.random() * (4.0 * scale)) + (2.0 * scale);
+    var doubles = Math.floor(Math.random() * scale) + (2.0 * scale);
     for (var i = 0; i < doubles; i++) {
         var pos = Math.floor(Math.random() * t.length);
         var letter = t[pos];
-        if (letter.match(/\w\.!\?/) && letter != t[pos - 1] && letter != t[pos + 1]) {
+        if (letter.match(/[\w\.!\?]/) && letter != t[pos - 1] && letter != t[pos + 1]) {
             t = t.substr(0, pos) + letter + t.substr(pos);
         }
     }
