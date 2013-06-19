@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Crimer Git Commit Message Hook
+#
+# After installing crimer.js and placing the crimer shell script in your $PATH
+# place this file in .git/hooks of any repository to automatically Crimerize
+# your commit messages for that project.
+
+CMD=`which crimer`
+MSG=`cat $1`
+$CMD $MSG > $1
