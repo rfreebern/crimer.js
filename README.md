@@ -14,6 +14,8 @@ Onteh Commands Linne:
 
     $ ./crimer CRIMER: Ha ha, CRIMER strikes again! I am terrible at baseball.
     CRIMER: Ha ha, CRIMER srtikes again! Im ams terrible at babsebal.
+    $ echo DETECTIVE: you are coming with me | ./crimer
+    DETECTIVE: You are ceminng Wtih me
 
 Ins A Ndoe Srcrtipt:
 

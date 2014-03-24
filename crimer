@@ -1,4 +1,11 @@
 #!/usr/bin/env node
 process.argv.shift(); // Get rid of 'node'
 process.argv.shift(); // Get rid of the script name
-console.log(require('./crimer.js')(process.argv.join(" ")));
+
+var fs = require("fs");
+var crimer = require("./");
+
+if (process.argv.length)
+  console.log(crimer(process.argv.join(" ")));
+else
+  console.log(crimer(fs.readFileSync("/dev/stdin", "utf-8")));
